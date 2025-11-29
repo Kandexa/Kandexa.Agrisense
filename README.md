@@ -39,8 +39,6 @@ Devices (ESP32 or similar) can send JSON payloads like:
   "lightLevel": 800
 }
 📁 Project Structure
-bash
-Kodu kopyala
 kandexa-agrisense/
 │
 ├── server/                 # Backend (Node.js + Express)
@@ -60,86 +58,59 @@ kandexa-agrisense/
 │
 ├── .gitignore
 └── README.md
+
 ⚙️ Tech Stack
 Backend
-Node.js
-
-Express
-
-MongoDB Atlas
-
-Mongoose
-
-dotenv
-
-CORS
+-Node.js
+-Express
+-MongoDB Atlas
+-Mongoose
+-dotenv
+-CORS
 
 Frontend
-HTML
-
-CSS
-
-Vanilla JavaScript
+-HTML
+-CSS
+-Vanilla JavaScript
 
 IoT (Planned)
-ESP32
-
-Soil Moisture Sensor
-
-DHT11/DHT22
-
-LDR
+-ESP32
+-Soil Moisture Sensor
+-DHT11/DHT22
+-LDR
 
 🧪 Run Locally
 1️⃣ Go to backend folder:
-bash
-Kodu kopyala
 cd server
 2️⃣ Install dependencies:
-bash
-Kodu kopyala
 npm install
 3️⃣ Add .env in /server:
-env
-Kodu kopyala
 MONGO_URI=your_mongodb_connection_string
 PORT=5000
 4️⃣ Start server:
-bash
-Kodu kopyala
 npm run dev
-Output should show:
-
-arduino
-Kodu kopyala
+Expected output:
 MongoDB connected: <cluster-url>
 Server running on http://localhost:5000
+
 🌐 API Endpoints
 GET /api/health
 Check server status.
-
 Response:
 
-json
-Kodu kopyala
 {
   "status": "ok",
   "message": "Kandexa AgriSense API running"
 }
+
 POST /api/readings
 Store a sensor reading.
-
 Body Example:
 
-json
-Kodu kopyala
-{
-  "sensorId": "field-1",
-  "soilMoisture": 50,
-  "airTemp": 22,
-  "airHumidity": 60,
-  "lightLevel": 900
-}
+POST /api/readings
+Store a sensor reading.
+Body Example:
+
 GET /api/readings/latest
 Get last reading.
 
@@ -148,27 +119,17 @@ Get last N readings (default: 50).
 
 📊 Dashboard
 Open in browser:
-
-arduino
-Kodu kopyala
 http://localhost:5000
+
 Dashboard includes:
-
-API status badge
-
-Last reading
-
-Test data sender
-
-Refresh button
-
+-API status badge
+-Last reading
+-Test data sender
+-Refresh button
 Works even without ESP32.
 
 🔌 ESP32 Integration (Optional)
 Example firmware:
-
-cpp
-Kodu kopyala
 String apiURL = "http://YOUR_PC_LOCAL_IP:5000/api/readings";
 
 HTTPClient http;
