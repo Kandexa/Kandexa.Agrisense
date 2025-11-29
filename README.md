@@ -11,8 +11,6 @@ The system is fully ready for IoT integration (ESP32 / sensor nodes), and includ
 - 🔌 IoT Data Pipeline (POST JSON → API → Database → UI)
 - 🔮 Future-ready AI module (Crop disease detection)
 
-This project demonstrates full-stack engineering, backend design, database modeling, and IoT-ready architecture.
-
 ---
 
 ## 🚀 Features
@@ -20,18 +18,17 @@ This project demonstrates full-stack engineering, backend design, database model
 ### ✔ Full-Stack Backend
 - Express.js REST API  
 - Mongoose + MongoDB Atlas  
-- Sensor data model  
 - Data validation  
-- Clean route structure  
+- Clean architecture  
 
 ### ✔ Smart Agriculture Dashboard
 - API health check  
 - View latest sensor reading  
 - Manual test data form  
-- Auto-refresh UI  
+- Auto-refresh metrics  
 
 ### ✔ IoT-Ready Data Flow
-Sensor devices (ESP32 or similar) can send JSON payloads like:
+Devices (ESP32 or similar) can send JSON payloads like:
 
 ```json
 {
@@ -42,12 +39,14 @@ Sensor devices (ESP32 or similar) can send JSON payloads like:
   "lightLevel": 800
 }
 📁 Project Structure
+bash
+Kodu kopyala
 kandexa-agrisense/
 │
 ├── server/                 # Backend (Node.js + Express)
 │   ├── server.js
 │   ├── package.json
-│   ├── .env                # Not included in GitHub
+│   ├── .env                # not included in GitHub
 │   ├── config/
 │   │   └── db.js
 │   ├── models/
@@ -55,133 +54,131 @@ kandexa-agrisense/
 │   └── routes/
 │       └── readings.js
 │
-├── public/                 # Frontend dashboard
+├── public/                 # Frontend Dashboard
 │   ├── index.html
 │   └── main.js
 │
 ├── .gitignore
 └── README.md
-
 ⚙️ Tech Stack
 Backend
-
 Node.js
 
 Express
 
-Mongoose
-
 MongoDB Atlas
 
-CORS
+Mongoose
 
 dotenv
 
+CORS
+
 Frontend
-
 HTML
-
-Vanilla JavaScript
 
 CSS
 
-IoT (Optional / Ready)
+Vanilla JavaScript
 
+IoT (Planned)
 ESP32
 
-Soil moisture sensor
+Soil Moisture Sensor
 
 DHT11/DHT22
 
 LDR
 
-HTTPClient library
+🧪 Run Locally
+1️⃣ Go to backend folder:
+bash
+Kodu kopyala
+cd server
+2️⃣ Install dependencies:
+bash
+Kodu kopyala
+npm install
+3️⃣ Add .env in /server:
+env
+Kodu kopyala
+MONGO_URI=your_mongodb_connection_string
+PORT=5000
+4️⃣ Start server:
+bash
+Kodu kopyala
+npm run dev
+Output should show:
 
-🧪 Running the Backend Locally
-1️⃣ Navigate to backend: cd server
-2️⃣ Install dependencies: npm install
-3️⃣ Create .env inside /server:MONGO_URI=your_mongodb_connection_string
-                               PORT=5000
-4️⃣ Start development server: npm run dev
-Expected output: MongoDB connected: <cluster-url>
-                 Server running on http://localhost:5000
-
+arduino
+Kodu kopyala
+MongoDB connected: <cluster-url>
+Server running on http://localhost:5000
 🌐 API Endpoints
 GET /api/health
+Check server status.
 
-Health check endpoint.
+Response:
 
-Response:      {
-                "status": "ok",
-                "message": "Kandexa AgriSense API running"
-               }
+json
+Kodu kopyala
+{
+  "status": "ok",
+  "message": "Kandexa AgriSense API running"
+}
 POST /api/readings
+Store a sensor reading.
 
-Stores a new sensor reading.
+Body Example:
 
-Headers: Content-Type: application/json
-Body: {
-        "sensorId": "field-1",
-        "soilMoisture": 50,
-        "airTemp": 23,
-        "airHumidity": 60,
-        "lightLevel": 900
-       }
-
+json
+Kodu kopyala
+{
+  "sensorId": "field-1",
+  "soilMoisture": 50,
+  "airTemp": 22,
+  "airHumidity": 60,
+  "lightLevel": 900
+}
 GET /api/readings/latest
-
-Returns the latest reading.
-
-Optional: /api/readings/latest?sensorId=field-1
+Get last reading.
 
 GET /api/readings?limit=50
+Get last N readings (default: 50).
 
-Returns last N readings.
-Default = 50.
+📊 Dashboard
+Open in browser:
 
-📊 Dashboard Usage
+arduino
+Kodu kopyala
+http://localhost:5000
+Dashboard includes:
 
-Open in browser: http://localhost:5000
-Dashboard features:
--API status badge
--Last sensor reading
--Manual test data input
--Auto-refresh metrics
-This allows full demo without ESP32 hardware.
+API status badge
 
-🔌 ESP32 Integration (Optional / Ready)
+Last reading
 
-Example firmware code (Arduino / PlatformIO):
-   String apiURL = "http://YOUR_PC_LOCAL_IP:5000/api/readings";
-   HTTPClient http;
-   http.begin(apiURL);
-   http.addHeader("Content-Type", "application/json");
-  
-   String body = "{\"sensorId\":\"field-1\",\"soilMoisture\":40,\"airTemp\":24,\"airHumidity\":55,\"lightLevel\":800}";
-   http.POST(body);
-   http.end();
-  
-ESP32 will send live data → API stores it → Dashboard displays it.
+Test data sender
 
-📸 Screenshots (optional to add)
+Refresh button
 
-Dashboard UI
+Works even without ESP32.
 
-API health response
+🔌 ESP32 Integration (Optional)
+Example firmware:
 
-MongoDB Atlas collections
+cpp
+Kodu kopyala
+String apiURL = "http://YOUR_PC_LOCAL_IP:5000/api/readings";
 
-Test data examples
+HTTPClient http;
+http.begin(apiURL);
+http.addHeader("Content-Type", "application/json");
 
-(You can add images later.)
+String body = "{\"sensorId\":\"field-1\",\"soilMoisture\":40,\"airTemp\":24,\"airHumidity\":55,\"lightLevel\":800}";
+http.POST(body);
+http.end();
 
 👨‍💻 Author
-
 Mehmet Celil Kandemir
-Control & Automation • Full-Stack Developer • IoT Enthusiast
-Creator of Kandexa automation & software solutions.
-
-📄 License
-
-This project is open for educational and portfolio purposes.
-
+Control & Automation • Full-Stack Development • IoT • Kandexa Projects
