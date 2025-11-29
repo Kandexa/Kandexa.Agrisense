@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kandexa AgriSense Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      h1 {
+        margin-bottom: 4px;
+      }
+
+      .subtitle {
+        color: #9ca3af;
+        margin-bottom: 24px;
+      }
+
+      .card {
+        background: #111827;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 16px;
+        border: 1px solid #1f2937;
+      }
+
+      .label {
+        font-size: 14px;
+        color: #9ca3af;
+      }
+
+      .value {
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .col {
+        flex: 1;
+        min-width: 180px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #1f2937;
+        color: #9ca3af;
+      }
+
+      button {
+        background: #22c55e;
+        border: none;
+        border-radius: 999px;
+        padding: 8px 16px;
+        color: #052e16;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 8px;
+      }
+
+      button:hover {
+        background: #16a34a;
+      }
+
+      .small {
+        font-size: 14px;
+        color: #9ca3af;
+      }
+
+      input {
+        background: #020617;
+        border-radius: 8px;
+        border: 1px solid #1f2937;
+        color: #e5e7eb;
+        padding: 6px 8px;
+        width: 100%;
+      }
+
+      .error {
+        color: #f97373;
+        font-size: 14px;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Kandexa AgriSense</h1>
+      <div class="subtitle">
+        AI Supported Smart Agriculture — <span id="status" class="badge">Checking API...</span>
+      </div>
+
+      <!-- Son sensör verisi kartı -->
+      <div class="card">
+        <div class="row">
+          <div class="col">
+            <div class="label">Sensor ID</div>
+            <div class="value" id="sensorId">—</div>
+          </div>
+          <div class="col">
+            <div class="label">Last Update</div>
+            <div class="value" id="lastUpdate">—</div>
+          </div>
+          <div class="col">
+            <div class="label">Source</div>
+            <div class="value" id="source">API</div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 16px">
+          <div class="col">
+            <div class="label">Soil Moisture (%)</div>
+            <div class="value" id="soilMoisture">—</div>
+          </div>
+          <div class="col">
+            <div class="label">Air Temperature (°C)</div>
+            <div class="value" id="airTemp">—</div>
+          </div>
+          <div class="col">
+            <div class="label">Air Humidity (%)</div>
+            <div class="value" id="airHumidity">—</div>
+          </div>
+          <div class="col">
+            <div class="label">Light Level</div>
+            <div class="value" id="lightLevel">—</div>
+          </div>
+        </div>
+
+        <button id="refreshBtn">Refresh Latest Data</button>
+        <div id="latestError" class="error"></div>
+      </div>
+
+      <!-- Test veri gönderme formu (ESP32 yokken deneme yapmak için) -->
+      <div class="card">
+        <div class="label">Manual Test Data (No ESP32 Required)</div>
+        <p class="small">
+          Below you can manually send a fake sensor reading (for demo purposes). Later, ESP32 will send the same
+          data automatically.
+        </p>
+        <div class="row">
+          <div class="col">
+            <div class="label">Sensor ID</div>
+            <input id="testSensorId" value="field-1" />
+          </div>
+          <div class="col">
+            <div class="label">Soil Moisture (%)</div>
+            <input id="testSoilMoisture" value="45" />
+          </div>
+          <div class="col">
+            <div class="label">Air Temp (°C)</div>
+            <input id="testAirTemp" value="24" />
+          </div>
+        </div>
+        <div class="row" style="margin-top: 8px">
+          <div class="col">
+            <div class="label">Air Humidity (%)</div>
+            <input id="testAirHumidity" value="55" />
+          </div>
+          <div class="col">
+            <div class="label">Light Level</div>
+            <input id="testLightLevel" value="800" />
+          </div>
+        </div>
+        <button id="sendTestBtn">Send Test Reading</button>
+        <div id="testError" class="error"></div>
+      </div>
+
+      <div class="small">
+        Made by Mehmet Celil Kandemir — Kandexa AgriSense • Full-Stack + IoT + Smart Agriculture
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
