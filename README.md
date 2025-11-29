@@ -184,3 +184,4 @@ Creator of Kandexa automation & software solutions.
 📄 License
 
 This project is open for educational and portfolio purposes.
+
