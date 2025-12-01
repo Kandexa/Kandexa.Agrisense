@@ -1,21 +1,17 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-// ---- WiFi Ayarları ----
 const char* ssid = "WIFI_ADIN";
 const char* password = "WIFI_SIFREN";
 
-// ---- API Endpoint ----
 String apiURL = "http://YOUR_PC_LOCAL_IP:5000/api/readings";
 
-// ---- Sensörler ----
-int soilPin = 34;  // Toprak nemi (analog)
-int ldrPin  = 35;  // Işık sensörü (analog)
+int soilPin = 34;  
+int ldrPin  = 35; 
 
 void setup() {
   Serial.begin(115200);
 
-  // WiFi bağlan
   WiFi.begin(ssid, password);
   Serial.print("WiFi Connecting");
   while (WiFi.status() != WL_CONNECTED) {
@@ -27,11 +23,9 @@ void setup() {
 
 void loop() {
 
-  // ----- Sensör Okumaları -----
   int soilRaw = analogRead(soilPin);
   int lightRaw = analogRead(ldrPin);
 
-  // ----- JSON Göndermek İçin -----
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
 
