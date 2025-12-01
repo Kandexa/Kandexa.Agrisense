@@ -1,8 +1,5 @@
-// public/main.js
-
 const API_BASE = 'http://localhost:5000';
 
-// DOM element referansları
 const statusEl = document.getElementById('status');
 const sensorIdEl = document.getElementById('sensorId');
 const lastUpdateEl = document.getElementById('lastUpdate');
@@ -96,10 +93,9 @@ async function sendTestReading() {
   }
 }
 
-// Event listeners
 refreshBtn.addEventListener('click', loadLatestReading);
 sendTestBtn.addEventListener('click', sendTestReading);
 
-// İlk açılışta çağır
 checkHealth();
 loadLatestReading();
+
