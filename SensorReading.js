@@ -1,4 +1,3 @@
-// server/models/SensorReading.js
 const mongoose = require('mongoose');
 
 const SensorReadingSchema = new mongoose.Schema({
@@ -29,3 +28,4 @@ const SensorReadingSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('SensorReading', SensorReadingSchema);
+
