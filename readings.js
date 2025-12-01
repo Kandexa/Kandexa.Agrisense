@@ -1,10 +1,7 @@
-// server/routes/readings.js
 const express = require('express');
 const router = express.Router();
 const SensorReading = require('../models/SensorReading');
 
-// POST /api/readings
-// Yeni ölçüm kaydet
 router.post('/', async (req, res) => {
   try {
     const { sensorId, soilMoisture, airTemp, airHumidity, lightLevel } = req.body;
@@ -34,8 +31,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET /api/readings/latest?sensorId=field-1
-// Belirli sensörün son ölçümü
 router.get('/latest', async (req, res) => {
   try {
     const { sensorId } = req.query;
@@ -54,8 +49,6 @@ router.get('/latest', async (req, res) => {
   }
 });
 
-// GET /api/readings?limit=50
-// Son N kaydı listele
 router.get('/', async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 50;
@@ -68,3 +61,4 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
+
